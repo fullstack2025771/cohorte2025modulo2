@@ -1,11 +1,13 @@
-{
+
+   { 
     "id" : 1,
     "nombre": "Esperanza Carvajal",
-    "edad": 50,
+    "edad": 20,
     "direccion": {
         "ciudad":"Bogota",
         "pais": "Colombia"
     },
-    "hobbies" : ["ver peliculas", "jugarBaloncesto", "natacion","leer el periodico"],
+    "hobbies" : ["ver peliculas", "jugarBaloncesto", "natacion","jugarVideojuegos"],
     "esCasada": true
-}
+         
+   }
