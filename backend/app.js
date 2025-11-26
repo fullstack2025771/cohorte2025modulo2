@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { conexionMongo } from "./src/config/db.js";
 import { productRouter } from "./src/routes/products.routes.js";
 import { userRouter } from "./src/routes/users.routes.js";
+import { loginRouter } from "./src/routes/login.routes.js";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -21,17 +22,24 @@ const _dirname =path.dirname(_filename);//_dirname=backend/src/configcual es la 
 
 
 // 3. funcionalidades que necesite agregar
-app.get("/",(req,res)=>{
- res.send('Server works!')
-});
-app.use(cors());
+// app.get("/",(req,res)=>{
+//  res.send('Server works!')
+// });
+app.use(cors()); // habilita cors
 app.use(express.json());
 app.use("/products",productRouter);
-app.use("/users", userRouter)
-app.use( "/uploads", express.static(path.join(_dirname,"src/uploads")));
+app.use("/users", userRouter);
+app.use("/uploads", express.static(path.join(_dirname,"src/uploads")));
+app.use("/login", loginRouter)
+
+ app.use(express.static(path.join(_dirname, "dist", "frontend", "browser")));
+ 
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(_dirname, "dist", "frontend", "browser", "index.html"));
+});
 
 
 
 app.listen(port, ()=>{
-    console.log(`El servidor esta ejecutandose en https://localhost:${port}`)
+    console.log(`El servidor esta ejecutandose en http://localhost:${port}`)
 });

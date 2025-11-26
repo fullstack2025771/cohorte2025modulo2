@@ -1,6 +1,6 @@
 import express from "express";
 import { postUser, getAllUsers, putUserById, deleteUserById } from "../controllers/users.controller.js";
- 
+ import { auth} from "../middleware/auth.js";
 //2.  Configurar las rutas.
 export const userRouter = express.Router();
 
@@ -8,12 +8,12 @@ export const userRouter = express.Router();
 
 
 // Ruta para el POST
-userRouter.post("/crear", postUser);
+userRouter.post("/", postUser);
 
 // Ruta para el GET
-userRouter.get("/mostrar", getAllUsers);
+userRouter.get("/", auth("admin"),  getAllUsers);
 
 //Ruta para el PUT
-userRouter.put("/actualizar/:id", putUserById);
+userRouter.put("/:id", putUserById);
 
-userRouter.delete("/eliminar/:id", deleteUserById);
+userRouter.delete("/:id", deleteUserById);

@@ -1,7 +1,7 @@
 //1. importaciones necesarias
 import multer from "multer";
 import path from "path";
-import fs from "fs";//modulo de name
+import fs from "fs";//modulo de node
 import { fileURLToPath } from "url";// modulo de node
 
 
@@ -26,10 +26,8 @@ if (!fs.existsSync(UPLOADS_FOLDER)){
         // donde vamos a guardar el archivo
        cb(null, UPLOADS_FOLDER) ;
     },
-    
-
     filename:(req, file, cb)=>{
-         const ext = path.extname(file.originalname);//extenciones -->jpg, .pdf
+    const ext = path.extname(file.originalname);//extenciones -->jpg, .pdf
     const base = path.basename(file.originalname, ext).replace(/\s+/g, "_"); // nombre
     cb(null, `${base}-${Date.now()}${ext}`);//nombre del archivo
     }
